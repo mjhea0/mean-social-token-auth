@@ -21,19 +21,36 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
 
   $routeProvider
     .when('/', {
-      templateUrl: 'partials/welcome.html'
+      templateUrl: 'partials/welcome.html',
+      access: {restricted: false}
     })
     .when('/home', {
-      templateUrl: 'partials/home.html'
+      templateUrl: 'partials/home.html',
+      access: {restricted: false}
     })
     .when('/login', {
       templateUrl: 'partials/login.html',
-      controller: 'loginCtrl'
+      controller: 'loginCtrl',
+      access: {restricted: false}
     })
     .when('/signup', {
       templateUrl: 'partials/signup.html',
-      controller: 'signupCtrl'
+      controller: 'signupCtrl',
+      access: {restricted: false}
+    })
+    .when('/ping', {
+      template: '<h1>Pong</h1>',
+      access: {restricted: true}
     })
     .otherwise('/');
 
+});
+
+app.run(function ($rootScope, $location, $route, $auth) {
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    if (next.access.restricted && !$auth.isAuthenticated()) {
+      $location.path('/login');
+      $route.reload();
+    }
+  });
 });
