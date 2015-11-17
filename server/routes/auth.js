@@ -119,7 +119,6 @@ router.post('/github', function(req, res) {
 
     // Step 2. Retrieve profile information about the current user.
     request.get({ url: userApiUrl, qs: accessToken, headers: headers, json: true }, function(err, response, profile) {
-      console.log(profile)
       // Step 3a. Link user accounts.
       if (req.headers.authorization) {
         User.findOne({ github: profile.id }, function(err, existingUser) {
