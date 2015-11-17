@@ -3,6 +3,7 @@ var router = express.Router();
 var moment = require('moment');
 var jwt = require('jwt-simple');
 var request = require('request');
+var qs = require('querystring');
 
 var config = require('../../_config');
 var User = require('../models/user.js');
@@ -101,7 +102,7 @@ router.post('/login', function(req, res) {
 });
 
 // *** github auth *** //
-app.post('/auth/github', function(req, res) {
+router.post('/github', function(req, res) {
   var accessTokenUrl = 'https://github.com/login/oauth/access_token';
   var userApiUrl = 'https://api.github.com/user';
   var params = {
@@ -136,7 +137,10 @@ app.post('/auth/github', function(req, res) {
             user.displayName = user.displayName || profile.name;
             user.save(function() {
               var token = createToken(user);
-              res.send({ token: token });
+              res.send({
+                token: token,
+                user: user
+              });
             });
           });
         });
@@ -145,7 +149,10 @@ app.post('/auth/github', function(req, res) {
         User.findOne({ github: profile.id }, function(err, existingUser) {
           if (existingUser) {
             var token = createToken(existingUser);
-            return res.send({ token: token });
+            return res.send({
+              token: token,
+              user: user
+            });
           }
           var user = new User();
           user.github = profile.id;
@@ -153,7 +160,10 @@ app.post('/auth/github', function(req, res) {
           user.displayName = profile.name;
           user.save(function() {
             var token = createToken(user);
-            res.send({ token: token });
+            res.send({
+              token: token,
+              user: user
+            });
           });
         });
       }

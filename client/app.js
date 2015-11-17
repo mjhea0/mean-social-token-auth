@@ -4,8 +4,9 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
 
   // *** satellizer settings *** //
   $authProvider.github({
-    clientId: 'ADD CLIENT ID',
-    redirectUri: 'UPDATE',
+    url: '/auth/github',
+    clientId: '1aaf1bf583d5e425dc8b',
+    redirectUri: window.location.origin
   });
 
   $routeProvider

@@ -10,6 +10,7 @@
 
 1. Clone
 1. `npm i`
+1. Add the social auth code to *server/routes/auth.js*
 1. Update *_config.js*
 1. Update *client/app.js*
 1. `nodemon`
