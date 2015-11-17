@@ -119,7 +119,7 @@ router.post('/github', function(req, res) {
 
     // Step 2. Retrieve profile information about the current user.
     request.get({ url: userApiUrl, qs: accessToken, headers: headers, json: true }, function(err, response, profile) {
-
+      console.log(profile)
       // Step 3a. Link user accounts.
       if (req.headers.authorization) {
         User.findOne({ github: profile.id }, function(err, existingUser) {
@@ -132,9 +132,8 @@ router.post('/github', function(req, res) {
             if (!user) {
               return res.status(400).send({ message: 'User not found' });
             }
-            user.github = profile.id;
-            user.picture = user.picture || profile.avatar_url;
-            user.displayName = user.displayName || profile.name;
+            user.email = profile.email;
+            user.githubProfileID = profile.id;
             user.save(function() {
               var token = createToken(user);
               res.send({
@@ -146,18 +145,17 @@ router.post('/github', function(req, res) {
         });
       } else {
         // Step 3b. Create a new user account or return an existing one.
-        User.findOne({ github: profile.id }, function(err, existingUser) {
+        User.findOne({ githubProfileID: profile.id }, function(err, existingUser) {
           if (existingUser) {
             var token = createToken(existingUser);
             return res.send({
               token: token,
-              user: user
+              user: existingUser
             });
           }
           var user = new User();
-          user.github = profile.id;
-          user.picture = profile.avatar_url;
-          user.displayName = profile.name;
+          user.email = profile.email;
+          user.githubProfileID = profile.id;
           user.save(function() {
             var token = createToken(user);
             res.send({
