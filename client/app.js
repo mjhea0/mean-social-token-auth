@@ -10,7 +10,12 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
   });
   $authProvider.google({
     url: '/auth/google',
-    clientId: '825959867150-japke0q9t7gfb1gq50a9937cjp87vrmu.apps.googleusercontent.com',
+    clientId: 'UPDATE ME',
+    redirectUri: window.location.origin,
+  });
+  $authProvider.instagram({
+    url: '/auth/instagram',
+    clientId: 'f146a03f10324f9e9ebf35dbe3eaa4a7',
     redirectUri: window.location.origin,
   });
 

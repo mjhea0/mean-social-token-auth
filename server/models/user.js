@@ -20,6 +20,9 @@ var User = new Schema({
   },
   googleProfileID: {
     type: String
+  },
+  instagramProfileID: {
+    type: String
   }
 });
 
