@@ -15,7 +15,7 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
   });
   $authProvider.instagram({
     url: '/auth/instagram',
-    clientId: 'f146a03f10324f9e9ebf35dbe3eaa4a7',
+    clientId: 'UPDATE ME',
     redirectUri: window.location.origin,
   });
 
