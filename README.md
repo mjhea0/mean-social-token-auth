@@ -6,10 +6,13 @@
 - [Node.js](http://nodejs.org)
 - [Satellizer](https://github.com/sahat/satellizer)
 
+> Boilerplate for Github, Google, and Instagram Auth
+
 ## Getting Started
 
 1. Clone
 1. `npm i`
+1. Update user model to match social provider
 1. Add the social auth code to *server/routes/auth.js*
 1. Update *_config.js*
 1. Update *client/app.js*

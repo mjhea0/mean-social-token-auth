@@ -17,6 +17,9 @@ var User = new Schema({
   },
   githubProfileID: {
     type: String
+  },
+  googleProfileID: {
+    type: String
   }
 });
 

@@ -8,6 +8,11 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
     clientId: 'UPDATE ME',
     redirectUri: window.location.origin
   });
+  $authProvider.google({
+    url: '/auth/google',
+    clientId: '825959867150-japke0q9t7gfb1gq50a9937cjp87vrmu.apps.googleusercontent.com',
+    redirectUri: window.location.origin,
+  });
 
   $routeProvider
     .when('/', {
