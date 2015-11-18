@@ -42,6 +42,11 @@ app.config(function($routeProvider, $authProvider, $locationProvider) {
       template: '<h1>Pong</h1>',
       access: {restricted: true}
     })
+    .when('/profile', {
+      templateUrl: 'partials/profile.html',
+      controller: 'profileCtrl',
+      access: {restricted: true}
+    })
     .otherwise('/');
 
 });

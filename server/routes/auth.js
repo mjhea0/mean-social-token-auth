@@ -101,6 +101,23 @@ router.post('/login', function(req, res) {
   });
 });
 
+// *** update user route *** //
+router.put('/update', ensureAuthenticated, function(req, res) {
+  User.findOne({_id: req.body._id}, function(err, user) {
+    if (!user) {
+      return res.status(401).send({
+        message: {
+          email: 'Incorrect email'
+        }
+      });
+    }
+    user.email = req.body.email;
+    user.save(function() {
+      res.send(user);
+    });
+  });
+});
+
 // *** github auth *** //
 router.post('/github', function(req, res) {
   var accessTokenUrl = 'https://github.com/login/oauth/access_token';

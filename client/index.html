@@ -29,6 +29,8 @@
             <li ng-if="!isAuthenticated()"><a href="#/login">Login</a></li>
             <li ng-if="!isAuthenticated()"><a href="#/signup">Signup</a></li>
             <li ng-if="isAuthenticated()"><a ng-click="logout()" href="">Logout</a></li>
+            <li ng-if="isAuthenticated()"><a href="#/profile">Profile</a></li>
+            <li><a href="#/ping">Ping</a></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -42,7 +44,7 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-lg-12 text-center">
+      <div class="col-sm-4 text-center">
         <div ng-view></div>
       </div>
     </div>
@@ -57,5 +59,6 @@
   <script type="text/javascript" src="controllers/navbar.js"></script>
   <script type="text/javascript" src="controllers/login.js"></script>
   <script type="text/javascript" src="controllers/signup.js"></script>
+  <script type="text/javascript" src="controllers/profile.js"></script>
 </body>
 </html>
